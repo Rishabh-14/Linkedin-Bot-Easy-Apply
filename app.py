@@ -13,3 +13,11 @@ import logging
 
 logging.basicConfig(level=logging.INFO);
 logger = logging.getLogger()
+
+class EasyApplyBot:
+    def __init__(self, config_filename):
+        with open(config_filename,'r') as file:
+            self.config = yaml.safe_load(file)
+        
+        self.driver = webdriver.Chrome()
+        
