@@ -32,6 +32,27 @@ class EasyApplyBot:
         password_input.send_keys(self.config['password'])
         
         password_input.send_keys(Keys.RETURN)
+    
+    def search_jobs(self, position, location):
+        # Navigate to the LinkedIn jobs page
+        self.driver.get("https://www.linkedin.com/jobs/")
+
+        # Find the job position and location search fields using their respective identifiers
+        # Note: The exact identifiers might change over time. It's always a good idea to check the current page's source.
+        position_field = self.driver.find_element_by_css_selector("input[aria-label='Search jobs']")
+        location_field = self.driver.find_element_by_css_selector("input[aria-label='Search location']")
+
+        # Input the desired position and location into the fields
+        position_field.clear()
+        position_field.send_keys(position)
+        location_field.clear()
+        location_field.send_keys(location)
+
+        # Locate the search button and click it
+        # Note: The search button might not have an ID or name, so we might need to use other methods like XPath.
+        search_button = self.driver.find_element_by_xpath("//button[@data-control-name='search_jobs']")
+        search_button.click()
+
 
  if __name__ == "__main__":
     bot = EasyApplyBot('config.yaml')
